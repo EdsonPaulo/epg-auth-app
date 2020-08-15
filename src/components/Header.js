@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import Icon from '@expo/vector-icons/FontAwesome5'
+import Icon from '@expo/vector-icons/AntDesign'
 import styled from 'styled-components/native'
 
 import colors from '../constants/colors'
@@ -12,7 +12,7 @@ const Header = ({ title }) => {
   return (
     <Container>
       <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.goBack()}>
-        <Icon name="chevron-left" size={30} color="#fff" />
+        <Icon name="swapleft" size={30} color="#fff" />
       </TouchableOpacity>
       <Text>{title}</Text>
     </Container>
@@ -29,7 +29,7 @@ const Container = styled.View`
   align-items: center
   flex-direction: row
   padding: 0 15px
-  margin: 20px 0
+  margin-top: 20px
 `
 
 const Text = styled.Text`

@@ -2,14 +2,16 @@ import React, { useContext, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
+import { StatusBar } from 'expo-status-bar'
+
 import {
   WelcomeScreen,
   LoginScreen,
   RegisterScreen,
   HomeScreen,
 } from '../screens'
-
 import AuthContext from '../contexts/auth/auth-context'
+import { colors } from '../constants'
 
 export default index = () => {
   const { isLogged, retrieveToken } = useContext(AuthContext)
@@ -34,6 +36,7 @@ export default index = () => {
   const RootStack = createStackNavigator()
   return (
     <NavigationContainer>
+      <StatusBar barStyle="light-content" backgroundColor={colors.bgColor} />
       <>
         {
           <RootStack.Navigator screenOptions={{ headerShown: false }}>

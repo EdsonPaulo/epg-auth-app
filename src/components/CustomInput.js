@@ -1,10 +1,9 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import Icon from '@expo/vector-icons/Feather'
+import { AntDesign, Feather } from '@expo/vector-icons'
 import styled from 'styled-components/native'
 
-import {colors, fonts} from '../constants'
+import {colors} from '../constants'
 
 const CustomInput = ({ type, title, ...rest }) => {
 
@@ -13,7 +12,7 @@ const CustomInput = ({ type, title, ...rest }) => {
 
   let keyboardType, iconName
   switch (type) {
-    case 'phone': { keyboardType = 'phone-pad', iconName = 'smartphone' } break
+    case 'phone': { keyboardType = 'phone-pad', iconName = 'mobile' } break
     case 'password': { keyboardType = 'default', iconName = 'lock' } break
     case 'name': { keyboardType = 'default', iconName = 'user' } break
     case 'email': { keyboardType = 'email-address', iconName = 'mail' } break
@@ -27,11 +26,11 @@ const CustomInput = ({ type, title, ...rest }) => {
   }, [])
 
   return (
-    <Container>
-      <Icon name={iconName} size={20} color={colors.textPrimary} />
+    <Container borderColor={borderColor}>
+      <AntDesign name={iconName} size={22} color={colors.textPrimary} />
       <TextInput {...rest}
         secureTextEntry={secureText}
-        onFocus={() => setBorderColor(colors.primary)}
+        onFocus={() => setBorderColor(colors.textLight)}
         onBlur={() => setBorderColor(colors.borderColor)}
         keyboardType={keyboardType}
         placeholderTextColor={colors.textLight} />
@@ -40,9 +39,9 @@ const CustomInput = ({ type, title, ...rest }) => {
             <TouchableOpacity onPress={() => setSecureText(!secureText)}>
               {
                 secureText ?
-                  <Icon size={16} name='eye' color={colors.textPrimary} />
+                  <Feather size={18} name='eye' color={colors.textPrimary} />
                   :
-                  <Icon size={16} name='eye-off' color={colors.textPrimary} />
+                  <Feather size={18} name='eye-off' color={colors.textPrimary} />
               }
             </TouchableOpacity>
             : null
@@ -55,6 +54,7 @@ const Container = styled.View`
   width: 100%
   height: 55px
   background-color: ${colors.secondary}
+  border-color: ${props => props.borderColor || colors.borderColor}
   border-radius: 10px
   align-items: center
   flex-direction: row
@@ -67,8 +67,9 @@ const TextInput = styled.TextInput`
   flex: 1
   height: 100%
   color: ${colors.textPrimary}
-  font-size: 16px
-  margin: 0 10px
+  font-size: 18px
+  text-align: center
+  margin: 0 5px
   letter-spacing: 1.1px
   font-family: 'Teko_400Regular'
 `
