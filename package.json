@@ -7,6 +7,9 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "dependencies": {
     "@expo-google-fonts/teko": "^0.1.0",
     "@react-native-community/masked-view": "0.1.10",

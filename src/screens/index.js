@@ -1,6 +1,6 @@
-import WelcomeScreen from './Auth/WelcomeScreen'
-import LoginScreen from './Auth/LoginScreen'
-import RegisterScreen from './Auth/RegisterScreen'
+import WelcomeScreen from './WelcomeScreen'
+import LoginScreen from './LoginScreen'
+import RegisterScreen from './RegisterScreen'
 import HomeScreen from './HomeScreen'
 
 export { WelcomeScreen, LoginScreen, RegisterScreen, HomeScreen }

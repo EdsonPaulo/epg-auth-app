@@ -7,6 +7,7 @@ import {
   Teko_400Regular,
   Teko_500Medium,
   Teko_600SemiBold,
+  Teko_700Bold
 } from '@expo-google-fonts/teko'
 
 import AuthProvider from "./src/contexts/auth/auth-provider"
@@ -18,6 +19,7 @@ export default function App() {
     Teko_400Regular,
     Teko_500Medium,
     Teko_600SemiBold,
+    Teko_700Bold
   })
 
   if (!fontsLoaded) return <AppLoading />

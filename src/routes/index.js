@@ -15,6 +15,7 @@ export default index = () => {
   const { isLogged, retrieveToken } = useContext(AuthContext)
 
   useEffect(() => {
+    //recupera o token para verificar se o usuário está logado
     const bootstrapAsync = async () => retrieveToken()
     bootstrapAsync()
   }, [])

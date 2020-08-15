@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "epg-auth-app",
+    "name": "EPG Auth",
     "slug": "epg-auth-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0E0C2E"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

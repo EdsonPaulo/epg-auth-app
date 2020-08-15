@@ -1,15 +1,13 @@
 const colors = {
-    bgColor: '#F9F9F9',
-    borderColor: '#E1E1E1',
+    bgColor: '#0E0C2E',
 
-    primaryDark: '#0D64A4',
-    primary: '#272727',
-    accent: '#3081B5',
+    textLight: '#5F5D77',
+    textPrimary: "#FBFBFB",
+    textSecondary: "#D5D5D5",
+    textSecondary: "#222",
 
-    // ACTIONS
-    success: '#3adb76',
-    warning: '#ffae00',
-    alert: '#cc4b37',
+    primary: '#EE0148',
+    secondary: "#201E3D",
 
     // GRAYSCALE
     grayLight: '#F0F2F5',
