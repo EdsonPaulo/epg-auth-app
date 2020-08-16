@@ -13,18 +13,13 @@ export default WelcomeScreen = () => {
       <Container>
         <Image resizeMode="contain" style={{ width: '100%', flex: 1/2 }} source={logo} />
 
-        <Text fontSize="24px">Bem Vindo</Text>
+        <Text fontSize="24px">Bem Vindo ao EPG Auth</Text>
 
         <View style={{flex: 1/2, justifyContent: "center"}}>
-          <CustomButton
-            title="ENTRAR"
-            primary
-            onPress={() => navigation.navigate('login')}
-          />
-          <CustomButton
-            title="CRIAR CONTA"
-            onPress={() => navigation.navigate('register')}
-          />
+          <CustomButton title="ENTRAR" primary
+            onPress={() => navigation.navigate('login')} />
+          <CustomButton title="CRIAR CONTA"
+            onPress={() => navigation.navigate('register')} />
 
           <Text fontSize="14px" marginVertical="20px">© 2020 - EPG Tech by EdsonPaulo</Text>
         </View>

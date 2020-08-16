@@ -84,10 +84,10 @@ export default LoginScreen = () => {
         </RowView>
 
         <RowView>
-          <SocialButton backgroundColor="#1C5AEB" onPress={() => Alert.alert('Em Breve')}>
+          <SocialButton backgroundColor="#1C5AEB" onPress={() => Alert.alert('Em Breve', 'Funcionalidade em falta!')}>
             <Icon name="facebook" size={25} color="#eee" />
           </SocialButton>
-          <SocialButton onPress={() => Alert.alert('Em Breve')}>
+          <SocialButton onPress={() => Alert.alert('Em Breve', 'Funcionalidade em falta!')}>
             <Icon name="google" size={25} color="#eee" />
           </SocialButton>
         </RowView>

@@ -44,10 +44,8 @@ export default RegisterScreen = () => {
               name: response.user.providerData[0].displayName,
             }
             const token = response.user.uid //Token falso, somente para simulação..
-            setSuccess(true)
-            console.log(user, token)
             setUserData({user, token})
-
+            setSuccess(true)
           }
         } catch (error) {
           if(error.code === "auth/email-already-in-use")
