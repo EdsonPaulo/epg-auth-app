@@ -50,7 +50,8 @@ export default RegisterScreen = () => {
         } catch (error) {
           if(error.code === "auth/email-already-in-use")
             Alert.alert('Erro ao Criar Conta','Já existe um usuário com esse email!')
-          console.log(error.code, error.message)
+          if(error.code === "auth/invalid-email")
+            Alert.alert('ERRO: Email inválido', 'Informe um email válido!')
           setLoading(false)
         }
       }

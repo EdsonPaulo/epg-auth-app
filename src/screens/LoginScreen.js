@@ -52,8 +52,11 @@ export default LoginScreen = () => {
             login(user, token)
           }
         } catch (error) {
-          console.log(error.code, error.message)
-          setLoading(false)
+            if(error.code === "auth/invalid-email")
+              Alert.alert('ERRO: Email inválido', 'Informe um email válido!')
+            if(error.code === "auth/user-not-found")
+              Alert.alert('ERRO: Usuário Inexistente', 'Esse usuário não existe!')
+            setLoading(false)
         }
       }
     } else Alert.alert('Dados em falta', 'Preencha todos os campos!')
