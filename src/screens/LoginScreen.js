@@ -23,7 +23,7 @@ import {
   SocialButton,
 } from './styles'
 
-import { firebase, signInWithEmail } from '../services/firebase'
+import {  signInWithEmail } from '../services/firebase'
 
 export default LoginScreen = () => {
   const navigation = useNavigation()
@@ -43,8 +43,8 @@ export default LoginScreen = () => {
           const response = await signInWithEmail(email, password)
           if (response) {
             const user = {
-              email: response.user.providerData[0].email,
-              name: response.user.providerData[0].displayName,
+              email: response.user.email,
+              name: response.user.displayName,
             }
             const token = response.user.uid //Token falso, somente para simulação..
             setLoading(false)

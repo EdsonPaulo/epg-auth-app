@@ -11,8 +11,7 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import Icon from '@expo/vector-icons/FontAwesome'
 
-import authContext from '../contexts/auth/auth-context'
-import { firebase, signUpWithEmail } from '../services/firebase'
+import { signUpWithEmail } from '../services/firebase'
 
 import { Header, CustomInput, CustomButton } from '../components'
 import { SafeArea, Container, Text, ModalView } from './styles'
@@ -20,9 +19,6 @@ import { colors } from '../constants'
 
 export default RegisterScreen = () => {
   const navigation = useNavigation()
-  const { register } = useContext(authContext)
-
-  const [userData, setUserData] = useState({ user: {}, token: "" })
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -38,14 +34,13 @@ export default RegisterScreen = () => {
         setLoading(true)
         try {
           const response = await signUpWithEmail(name, email, password)
-          if (response) {
-            const user = {
-              email: response.user.providerData[0].email,
-              name: response.user.providerData[0].displayName,
-            }
-            const token = response.user.uid //Token falso, somente para simulação..
-            setUserData({user, token})
+          if (response?.user?.email)
+          {
             setSuccess(true)
+            setTimeout(() => {
+              setLoading(false)
+              navigation.navigate("login")
+            }, 1000)
           }
         } catch (error) {
           if(error.code === "auth/email-already-in-use")
@@ -80,7 +75,7 @@ export default RegisterScreen = () => {
           <Text marginVertical="20px">Já tem uma conta? Fazer Login</Text>
         </TouchableOpacity>
 
-        <Modal animationType="slide" transparent visible={loading}>
+        <Modal animationType="slide"  transparent visible={loading}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <ModalView>
             { !success ? ( <ActivityIndicator size="large" color={colors.primary} /> ) :
@@ -88,8 +83,7 @@ export default RegisterScreen = () => {
                 <View>
                   <Icon name="check" style={{alignSelf: "center"}} size={50} color={colors.primary} />
                   <Text color="#000">Conta criada com sucesso!</Text>
-                  <CustomButton primary title="Continuar"
-                    onPress={ ()=> register(userData.user, userData.token)}/>
+                  <Text color="#000">Faça o login com as suas credenciais..</Text>
                 </View>
               )
             }

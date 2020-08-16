@@ -8,6 +8,5 @@ export default React.createContext({
 
     login: (user, token) => {},
     logout: () => {},
-    register: (user, token) => {},
     retrieveToken: () => {}
 })

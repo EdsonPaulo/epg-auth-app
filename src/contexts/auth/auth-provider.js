@@ -6,7 +6,6 @@ import {
   authReducer,
   LOGIN,
   LOGOUT,
-  REGISTER,
   RETRIEVE_TOKEN,
 } from './auth-reducer'
 import { constants } from '../../constants'
@@ -25,7 +24,6 @@ const AuthProvider = (props) => {
         [constants.USER_KEY, JSON.stringify(user)],
         [constants.TOKEN_KEY, token],
       ])
-      console.log('logou: ' + authState.isLogged)
       dispatch({ type: LOGIN, user, token })
     } catch (error) {
       throw new Error(error)
@@ -50,18 +48,6 @@ const AuthProvider = (props) => {
     dispatch({ type: RETRIEVE_TOKEN, token, user })
   }
 
-  const register = async (user, token) => {
-    try {
-      await AsyncStorage.multiSet([
-        [constants.USER_KEY, JSON.stringify(user)],
-        [constants.TOKEN_KEY, token],
-      ])
-      dispatch({ type: REGISTER, user, token })
-    } catch (error) {
-      throw new Error(error)
-    }
-  }
-
   const value = useMemo(() => {
     return {
       user: authState.user,
@@ -69,10 +55,9 @@ const AuthProvider = (props) => {
       isLogged: !!authState.token,
       isLoading: authState.isLoading,
 
-      login: login,
-      logout: logout,
-      register: register,
-      retrieveToken: retrieveToken,
+      login,
+      logout,
+      retrieveToken,
     }
   })
 
