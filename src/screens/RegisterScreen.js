@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Platform,
   KeyboardAvoidingView,
@@ -6,6 +6,7 @@ import {
   Alert,
   ActivityIndicator,
   View,
+  Animated,
   Modal,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
@@ -19,6 +20,8 @@ import { colors } from '../constants'
 
 export default RegisterScreen = () => {
   const navigation = useNavigation()
+
+  const [ offset ] = useState( new Animated.Value(-75))
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -53,22 +56,35 @@ export default RegisterScreen = () => {
     } else Alert.alert('Dados em falta','Preencha todos os campos!')
   }
 
+  useEffect(()=> {
+    Animated.spring(offset, {
+        useNativeDriver: true,
+        toValue: 0,
+        speed: 6,
+        bounciness: 23
+    }).start()
+  }, [])
+
   return (
     <SafeArea>
       <Header title="CRIAR CONTA" />
 
       <Container>
         <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
-          <CustomInput type="name" placeholder="Nome e Sobrenome"
-            onChangeText={(value) => setName(value)} />
+          <Animated.View  style={{ transform: [{translateX: offset}] }}>
 
-          <CustomInput type="email" placeholder="Endereço de Email"
-            onChangeText={(value) => setEmail(value)} />
+            <CustomInput type="name" placeholder="Nome e Sobrenome"
+              onChangeText={(value) => setName(value)} />
 
-          <CustomInput type="password" placeholder="Senha"
-            onChangeText={(value) => setPassword(value)}/>
+            <CustomInput type="email" placeholder="Endereço de Email"
+              onChangeText={(value) => setEmail(value)} />
 
-          <CustomButton title="CRIAR CONTA" primary onPress={SignUp} />
+            <CustomInput type="password" placeholder="Senha"
+              onChangeText={(value) => setPassword(value)}/>
+
+            <CustomButton title="CRIAR CONTA" primary onPress={SignUp} />
+          </Animated.View>
+
         </KeyboardAvoidingView>
 
         <TouchableOpacity onPress={() => navigation.navigate('login')}>

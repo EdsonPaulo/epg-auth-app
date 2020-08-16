@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
   Alert,
   Modal,
+  Animated,
   View,
   ActivityIndicator,
 } from 'react-native'
@@ -29,6 +30,8 @@ export default LoginScreen = () => {
   const navigation = useNavigation()
   const { login } = useContext(authContext)
 
+  const [ offset ] = useState( new Animated.Value(75))
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -48,7 +51,6 @@ export default LoginScreen = () => {
             }
             const token = response.user.uid //Token falso, somente para simulação..
             setLoading(false)
-            console.log(user, token)
             login(user, token)
           }
         } catch (error) {
@@ -62,22 +64,35 @@ export default LoginScreen = () => {
     } else Alert.alert('Dados em falta', 'Preencha todos os campos!')
   }
 
+  useEffect(()=> {
+    Animated.spring(offset, {
+        useNativeDriver: true,
+        toValue: 0,
+        speed: 6,
+        bounciness: 23
+    }).start()
+  }, [])
+
   return (
     <SafeArea>
       <Header title="ENTRAR" />
       <Container>
         <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
-          <CustomInput type="email" placeholder="edson@example.com"
-            onChangeText={(value) => setEmail(value)} />
+          <Animated.View  style={{ transform: [{translateX: offset}] }}>
 
-          <CustomInput type="password" placeholder="*********"
-            onChangeText={(value) => setPassword(value)} />
+            <CustomInput type="email" placeholder="edson@example.com"
+              onChangeText={(value) => setEmail(value)} />
 
-          <TouchableOpacity>
-            <Text textAlign="right">Esqueceu a sua senha?</Text>
-          </TouchableOpacity>
+            <CustomInput type="password" placeholder="*********"
+              onChangeText={(value) => setPassword(value)} />
 
-          <CustomButton title="ENTRAR" primary onPress={SignIn} />
+            <TouchableOpacity>
+              <Text textAlign="right">Esqueceu a sua senha?</Text>
+            </TouchableOpacity>
+
+            <CustomButton title="ENTRAR" primary onPress={SignIn} />
+
+          </Animated.View>
         </KeyboardAvoidingView>
 
         <RowView>

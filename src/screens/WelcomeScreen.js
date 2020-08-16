@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image } from 'react-native'
+import { View, Image, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { SafeArea, Container, Text } from './styles'
@@ -8,6 +8,18 @@ import logo from '../../assets/Logo.png'
 
 export default WelcomeScreen = () => {
   const navigation = useNavigation()
+
+  const [ offset ] = React.useState( new Animated.Value(75))
+
+  React.useEffect(()=> {
+    Animated.spring(offset, {
+        useNativeDriver: true,
+        toValue: 0,
+        speed: 6,
+        bounciness: 23
+    }).start()
+  }, [])
+
   return (
     <SafeArea>
       <Container>
@@ -15,14 +27,14 @@ export default WelcomeScreen = () => {
 
         <Text fontSize="24px">Bem Vindo ao EPG Auth</Text>
 
-        <View style={{flex: 1/2, justifyContent: "center"}}>
+        <Animated.View style={{flex: 1/2, justifyContent: "center", transform: [{translateY: offset}]}}>
           <CustomButton title="ENTRAR" primary
             onPress={() => navigation.navigate('login')} />
           <CustomButton title="CRIAR CONTA"
             onPress={() => navigation.navigate('register')} />
 
           <Text fontSize="14px" marginVertical="20px">© 2020 - EPG Tech by EdsonPaulo</Text>
-        </View>
+        </Animated.View>
       </Container>
     </SafeArea>
   )

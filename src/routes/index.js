@@ -25,7 +25,7 @@ export default index = () => {
   const AuthNavigation = () => {
     const AuthStack = createStackNavigator()
     return (
-      <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+      <AuthStack.Navigator screenOptions={{ headerShown: false, mode: "modal", animationEnabled: true }}>
         <AuthStack.Screen name="welcome" component={WelcomeScreen} />
         <AuthStack.Screen name="login" component={LoginScreen} />
         <AuthStack.Screen name="register" component={RegisterScreen} />
