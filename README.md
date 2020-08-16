@@ -7,7 +7,7 @@ Created with Expo: <a href="https://docs.expo.io/get-started/installation/">Get 
 
 With terminal in project root type:
 - <b>expo install</b> (to install dependencies)
-- <b>expo start</b> (to start the expo erver with the app)
+- <b>expo start</b> (to start the expo server with the app)
 And folow the terminal instructions...
 
 @epg @epg-auth @expo @reactnative
