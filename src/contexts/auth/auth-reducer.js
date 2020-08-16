@@ -35,7 +35,5 @@ export const authReducer = (prevState, action) => {
         isLogged: true
       }
   }
-
-  
 }
 

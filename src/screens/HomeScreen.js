@@ -17,7 +17,7 @@ export default HomeScreen = () => {
         <Image resizeMode="contain" style={{ width: '100%' }} source={logo} />
 
         <View>
-          <Text fontSize="22px">Olá, {user?.name || 'EdsonPaulo'}</Text>
+          <Text fontSize="22px">Olá, {user?.displayName || user?.email}</Text>
           <Text fontSize="18px">
             Esse é um app demo de fluxo de autenticação feito por @EdsonPaulo
           </Text>

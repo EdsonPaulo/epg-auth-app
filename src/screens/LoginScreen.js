@@ -1,47 +1,108 @@
 import React, { useContext, useState } from 'react'
-import { View, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native'
+import {
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+  Alert,
+  Modal,
+  View,
+  ActivityIndicator,
+} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import Icon from '@expo/vector-icons/FontAwesome'
 
+import authContext from '../contexts/auth/auth-context'
 import { Header, CustomInput, CustomButton } from '../components'
-import { SafeArea, Container, Text, Divider} from './styles'
-import { colors } from '../constants'
+import {
+  SafeArea,
+  Container,
+  Text,
+  Divider,
+  RowView,
+  ModalView,
+  SocialButton,
+} from './styles'
 
-import authContext from "../contexts/auth/auth-context"
+import { firebase, signInWithEmail } from '../services/firebase'
 
 export default LoginScreen = () => {
-
   const navigation = useNavigation()
   const { login } = useContext(authContext)
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const SignIn = () => {
-
-    login({name: "Edson Paulo Gregório"}, "fake-token")
+  const SignIn = async () => {
+    if (email && password) {
+      if (password.length < 6)
+        Alert.alert('Senha errada', 'A senha tem 6 ou mais dígitos')
+      else {
+        setLoading(true)
+        try {
+          const response = await signInWithEmail(email, password)
+          if (response) {
+            const user = {
+              email: response.user.providerData[0].email,
+              name: response.user.providerData[0].displayName,
+            }
+            const token = response.user.uid //Token falso, somente para simulação..
+            setLoading(false)
+            console.log(user, token)
+            login(user, token)
+          }
+        } catch (error) {
+          console.log(error.code, error.message)
+          setLoading(false)
+        }
+      }
+    } else Alert.alert('Dados em falta', 'Preencha todos os campos!')
   }
 
   return (
     <SafeArea>
       <Header title="ENTRAR" />
       <Container>
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
-          <CustomInput type="email" placeholder="edson@example.com" onChangeText={value => setEmail(value)} />
-          <CustomInput type="password" placeholder="*********" onChangeText={value => setPassword(value)} />
+        <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+          <CustomInput type="email" placeholder="edson@example.com"
+            onChangeText={(value) => setEmail(value)} />
+
+          <CustomInput type="password" placeholder="*********"
+            onChangeText={(value) => setPassword(value)} />
+
           <TouchableOpacity>
             <Text textAlign="right">Esqueceu a sua senha?</Text>
           </TouchableOpacity>
+
           <CustomButton title="ENTRAR" primary onPress={SignIn} />
         </KeyboardAvoidingView>
 
-        <View style={{flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
-          <Divider /> <Text>Ou</Text> <Divider />
-        </View>
+        <RowView>
+          <Divider />
+          <Text>Ou</Text>
+          <Divider />
+        </RowView>
 
-        <TouchableOpacity onPress={() => navigation.navigate("register")}>
+        <RowView>
+          <SocialButton backgroundColor="#1C5AEB" onPress={() => Alert.alert('Em Breve')}>
+            <Icon name="facebook" size={25} color="#eee" />
+          </SocialButton>
+          <SocialButton onPress={() => Alert.alert('Em Breve')}>
+            <Icon name="google" size={25} color="#eee" />
+          </SocialButton>
+        </RowView>
+
+        <TouchableOpacity onPress={() => navigation.navigate('register')}>
           <Text marginVertical="20px">Não tem uma conta? Criar uma conta</Text>
         </TouchableOpacity>
+
+        <Modal animationType="slide" transparent visible={loading}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+            <ModalView>
+              <ActivityIndicator size="large" color="#EE0148" />
+            </ModalView>
+          </View>
+        </Modal>
       </Container>
     </SafeArea>
   )
