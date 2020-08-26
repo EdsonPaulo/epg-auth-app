@@ -1,5 +1,5 @@
 # epg-auth-app
-A React Native app with authentication flow
+A Simple React Native app with authentication flow
 
 ## Libraries:
 - React Navigation v5
