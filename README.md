@@ -8,6 +8,11 @@ A React Native app with authentication flow
 
 Created with Expo: <a href="https://docs.expo.io/get-started/installation/">Get Started with Expo </a>
 
+   <img src="https://github.com/EdsonPaulo/my-images/blob/master/epgauth0.png" width="33%" /> 
+   <img src="https://github.com/EdsonPaulo/my-images/blob/master/epgauth.png" width="33%" /> 
+   <img src="https://github.com/EdsonPaulo/my-images/blob/master/epgauth1.png" width="33%" /> 
+
+
 #Running
 With terminal in project root, type:
 - <b>expo install</b> (to install dependencies)
