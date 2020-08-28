@@ -14,7 +14,7 @@ With terminal in project root, type it:
 - <b>expo start</b> (to start the expo server with the app)
 And folow the terminal instructions...
 <br>
-<div>
+<div style="width: 100%">
    <img src="https://github.com/EdsonPaulo/my-images/blob/master/epgauth0.png" width="33%" /> 
    <img src="https://github.com/EdsonPaulo/my-images/blob/master/epg-auth.png" width="33%" /> 
    <img src="https://github.com/EdsonPaulo/my-images/blob/master/epgauth1.png" width="33%" /> 
