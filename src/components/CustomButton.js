@@ -9,24 +9,28 @@ const CustomButton = ({ primary, title, icon, ...rest }) => {
   return (
     <Button {...rest} primary={primary}>
       <Text primary={primary}>{title}</Text>
-      {
-        !icon ? null :
-        <Icon size={20} name={icon} color={primary ? colors.textPrimary : colors.textSecondary} />
-      }
+      {icon && (
+        <Icon
+          size={20}
+          name={icon}
+          color={primary ? colors.textPrimary : colors.textSecondary}
+        />
+      )}
     </Button>
   )
 }
 
 const Text = styled.Text`
-  color: ${(props) => props.primary ? colors.textPrimary : colors.textSecondary}
+  color: ${(props) =>
+    props.primary ? colors.textPrimary : colors.textSecondary}
   font-size: 20px
-  letter-spacing: 1.3px
+  letter-spacing: 1px
   font-family: 'Teko_500Medium'
   margin: 0 10px
 `
 const Button = styled(RectButton)`
   background-color: ${(props) => (props.primary ? colors.primary : '#fff')}
-  border-radius: 10px
+  border-radius: 8px
   border-top-left-radius: 10px
   height: 50px
   flex-direction: row
