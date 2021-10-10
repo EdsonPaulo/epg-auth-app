@@ -36,7 +36,7 @@ export default index = () => {
   const RootStack = createStackNavigator()
   return (
     <NavigationContainer>
-      <StatusBar barStyle="light-content" backgroundColor={colors.bgColor} />
+      <StatusBar style="light" barStyle="light-content" backgroundColor={colors.bgColor} />
       <>
         {
           <RootStack.Navigator screenOptions={{ headerShown: false }}>
